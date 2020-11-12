@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.hero {
+    padding-top: 60px;
+}
+
+.small-info {
+
+    border-width: 3px;
+}
+
+footer {
+    padding-bottom: 0;
+}
