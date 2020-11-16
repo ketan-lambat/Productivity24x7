@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'corsheaders',
     'colorfield',
+    'rest_framework_swagger',
     'base',
     'oauth',
     'core',
