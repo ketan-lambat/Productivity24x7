@@ -57,7 +57,7 @@ body {
     color: #5379fa !important;
 }
 
-.register {
+.profile {
     position: absolute;
     top: calc(50% - 75px);
     left: calc(50% - 50px);
@@ -67,7 +67,7 @@ body {
     z-index: 2;
 }
 
-.register input[type=text] {
+.profile input[type=text] {
     width: 250px;
     height: 30px;
     background: transparent;
@@ -80,7 +80,7 @@ body {
     padding: 4px;
 }
 
-.register input[type=password] {
+.profile input[type=password] {
     width: 250px;
     height: 30px;
     background: transparent;
@@ -94,7 +94,7 @@ body {
     margin-top: 10px;
 }
 
-.register input[type=submit] {
+.profile input[type=submit] {
     width: 260px;
     height: 35px;
     background: #fff;
@@ -109,15 +109,15 @@ body {
     margin-top: 10px;
 }
 
-.register input[type=submit]:hover {
+.profile input[type=submit]:hover {
     opacity: 0.8;
 }
 
-.register input[type=submit]:active {
+.profile input[type=submit]:active {
     opacity: 0.6;
 }
 
-.register input[type=text]:focus {
+.profile input[type=text]:focus {
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.9);
 }

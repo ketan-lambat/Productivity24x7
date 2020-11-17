@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'base',
     'oauth',
     'core',
+    'register'
 ]
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -129,4 +130,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'register.User'
