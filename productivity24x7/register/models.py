@@ -35,6 +35,9 @@ class User(AbstractBaseUser):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.email})"
 
+    def repr(self):
+        return f"{self.first_name} {self.last_name} ({self.email})"
+
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}"

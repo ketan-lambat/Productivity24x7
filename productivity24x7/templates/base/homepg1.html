@@ -55,9 +55,9 @@
         {% if request.user.is_authenticated %}
             <form class="form-inline my-2 my-lg-0">
 
-                <button class="btn btn-outline-primary my-2 my-sm-0">{{ request.user }}</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0">{{ request.user.repr }}</button>
             </form>
-        {% elif %}
+        {% else %}
             <form class="form-inline my-2 my-lg-0" action="{% url 'login' %}">
 
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button>

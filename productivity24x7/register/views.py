@@ -129,7 +129,7 @@ def profile_create(request):
         if pwd != re_pwd:
             error = error + "Passwords must match. "
         if error == "":
-            u.first_name = "Hello"
+            u.first_name = fn
             u.last_name = ln
             u.is_active = True
             u.set_password(pwd)
