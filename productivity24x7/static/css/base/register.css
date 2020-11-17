@@ -134,3 +134,15 @@ body {
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.9);
 }
+
+.register a {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.register div {
+    text-align: center;
+    font-size: 1.3em;
+}
