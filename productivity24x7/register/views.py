@@ -144,12 +144,12 @@ def profile_create(request):
 
 @login_required(redirect_field_name="next", login_url=reverse_lazy('login'))
 def profile(request):
-    return redirect(to="homepage")
+    return redirect(to="home")
 
 
 def auth_callback(request, provider):
     if provider == 'github':
-        print(request.session['github_oauth_state'])
+        # print(request.session['github_oauth_state'])
         if 'github_oauth_state' in request.session and 'github_oauth_use' in request.session:
             state = request.session['github_oauth_state']
             path = "https://localhost" + request.get_full_path()
