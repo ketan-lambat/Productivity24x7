@@ -17,11 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_swagger.views import get_swagger_view
 
+from rest_framework_simplejwt import views as jwt_views
+
 schema_view = get_swagger_view(title='Productivity24x7')
 
 urlpatterns = [
     path('', include('base.urls')),
+    path('api/', include('base.api.urls')),
     path('admin/', admin.site.urls),
     path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('swagger-api/', schema_view),
+    path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]

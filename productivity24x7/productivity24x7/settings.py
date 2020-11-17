@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'colorfield',
     'rest_framework_swagger',
+    'rest_framework.authtoken',
     'base',
     'oauth',
     'core',
@@ -132,7 +133,28 @@ STATICFILES_DIRS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
 AUTH_USER_MODEL = 'register.User'
+
+LOGIN_URL = '/auth/login'
+LOGOUT_URL = '/auth/logout'
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'apiKey': {
+            'type': 'apiKey',
+            'name': 'Bearer',
+            'in': 'header'
+        }
+    }
+}
