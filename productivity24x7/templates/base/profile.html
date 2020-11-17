@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css\base\profile.css' %}">
+</head>
+<body>
+
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div>Productivity<span>24x7</span></div>
+</div>
+<br>
+<div class="profile">
+    <form method="POST" action="{% url 'profile_create' %}">
+        <input type="text" disabled value="{{ email }}">
+        <input type="text" name="first_name" id="first_name" value="{{ first_name }}" placeholder="First Name">
+        <input type="text" name="last_name" id="last_name" value="{{ last_name }}" placeholder="Last Name">
+        <input type="password" name="password" id="password" placeholder="Password">
+        <input type="password" name="re_password" id="re_password" placeholder="Confirm Password">
+        <input type="hidden" value="{{ token }}" name="token">
+        <input type="hidden" value="{{ b64id }}" name="b64id">
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+</body>
+</html>

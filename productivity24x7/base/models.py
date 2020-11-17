@@ -4,14 +4,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from colorfield.fields import ColorField
 
 
-# Create your models here.
-class User(AbstractUser):
-    # REQUIRED_FIELDS = ['username', 'email']
-
-    def __str__(self):
-        return self.username
-
-
 class Tag(models.Model):
     priority = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(100)])
     name = models.CharField(max_length=25, blank=False)

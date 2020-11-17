@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'base',
     'oauth',
     'core',
+    'register'
 ]
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -136,3 +137,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+AUTH_USER_MODEL = 'register.User'
+l̥

@@ -16,9 +16,15 @@
 </div>
 <br>
 <div class="login">
-    <input type="text" placeholder="username" name="user"><br>
-    <input type="password" placeholder="password" name="password"><br>
-    <input type="button" value="Login">
+    <form method="POST">
+        <input type="email" name="email" id="email" placeholder="Email">
+        <input type="password" name="password" id="password" placeholder="Password">
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+    <a href="{{ GITHUB_AUTH }}">GitHub</a>
+    <a href="{% url 'register' %}">Create a new Account</a>
+    <div style="color: red">{{ error }}</div>
 </div>
 
 
