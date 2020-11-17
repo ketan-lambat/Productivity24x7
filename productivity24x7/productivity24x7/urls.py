@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Productivity24x7')
 
 urlpatterns = [
     path('', include('base.urls')),
     path('admin/', admin.site.urls),
     path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('swagger-api/', schema_view),
 ]
