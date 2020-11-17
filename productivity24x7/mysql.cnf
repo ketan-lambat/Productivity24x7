@@ -1,6 +1,6 @@
 # my.cnf
 [client]
-database = Productivity
+database = productivity
 user = root
 password = password
 default-character-set = utf8
