@@ -102,3 +102,9 @@ class Event(models.Model):
 class EventTags(models.Model):
     tag = models.ForeignKey(to=Tag, related_name="events", on_delete=models.CASCADE)
     event = models.ForeignKey(to=Event, related_name="_tags", on_delete=models.CASCADE)
+
+
+class WebHook(models.Model):
+    secret = models.CharField(max_length=40, blank=False)
+    url = models.URLField(max_length=150, blank=False)
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, editable=False)
