@@ -26,7 +26,8 @@ def webhook(sender, instance, created, **kwargs):
             requests.post(w.url, data=s_data, headers={
                 'x-event': 'event.' + e_type,
                 'x-signature': sig,
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'user-agent': 'server'
             })
         except requests.exceptions.RequestException:
             pass
