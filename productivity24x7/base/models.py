@@ -39,3 +39,13 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=100, blank=False)
+    description = models.CharField(max_length=350, blank=True)
+    g_event_id = models.CharField(max_length=100, blank=True)
+    start_time = models.DateTimeField(blank=False)
+
+    def __str__(self):
+        return self.title
