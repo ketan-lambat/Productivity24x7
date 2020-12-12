@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_framework.authtoken',
     'base',
-    'oauth',
-    'core',
     'register'
 ]
 MIDDLEWARE = [
@@ -144,7 +142,7 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
@@ -160,6 +158,24 @@ SWAGGER_SETTINGS = {
             'type': 'apiKey',
             'name': 'Bearer',
             'in': 'header'
+        },
+        'basic': {
+            'type': 'basic'
         }
+    }
+}
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'tags.read': "Read Tags",
+        'tags.edit': "Edit Tags",
+        'tags.delete': "Delete Tags",
+        'tags.add': "Add New Tags",
+        'task.read': "Read Tasks",
+        'task.edit': "Edit Tasks",
+        'task.delete': "Delete Tasks",
+        'task.add': "Add New Tasks",
+        'event.read': "Read Events",
+        'event.add': "Add New Event"
     }
 }
