@@ -149,10 +149,10 @@ def profile(request):
 
 def auth_callback(request, provider):
     if provider == 'github':
-        # print(request.session['github_oauth_state'])
+        host = request.scheme + "://" + request.get_host()
         if 'github_oauth_state' in request.session and 'github_oauth_use' in request.session:
             state = request.session['github_oauth_state']
-            path = "https://localhost" + request.get_full_path()
+            path = host + request.get_full_path()
             data = verify_github(path, state)
             email = data[0]['email']
             if request.session['github_oauth_use'] == 'register':

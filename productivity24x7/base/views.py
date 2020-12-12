@@ -8,6 +8,7 @@ from google.auth.transport.requests import Request
 from django.conf import settings
 from .models import Event
 from django.contrib.auth.decorators import login_required
+from django.http.response import JsonResponse
 
 
 def homepage_view(request):
@@ -22,7 +23,7 @@ def get_calender_events_view(request):
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             cred = pickle.load(token)
-        # If there are no (valid) credentials available, let the user log in.
+
     if not cred or not cred.valid:
         if cred and cred.expired and cred.refresh_token:
             cred.refresh(Request())
@@ -30,7 +31,7 @@ def get_calender_events_view(request):
             flow = InstalledAppFlow.from_client_secrets_file(
                 credentials_file, scopes)
             cred = flow.run_local_server(port=0)
-        # Save the credentials for the next run
+
         with open('token.pickle', 'wb') as token:
             pickle.dump(cred, token)
 
@@ -75,9 +76,13 @@ def get_calender_events_view(request):
 
 
 @login_required()
-def disply_calendar_events(request):
+def display_calendar_events(request):
     events = Event.objects.all().order_by('start')
     context = {
         'events_arr': events,
     }
     return render(request, 'base/events.html', context=context)
+
+
+def status(request):
+    return JsonResponse(data={'status': "OK", 'timestamp': datetime.datetime.now().isoformat()})

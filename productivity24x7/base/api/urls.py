@@ -2,6 +2,7 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
+    path('', views.home),
     path('webhooks', views.WebHookBasic.as_view()),
     path('event', views.EventBasic.as_view()),
     path('event/<int:idd>', views.EventDetails.as_view()),

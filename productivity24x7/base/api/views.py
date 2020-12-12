@@ -5,10 +5,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListAPIView
 from django.http import Http404
 from oauth2_provider.contrib.rest_framework.permissions import TokenMatchesOASRequirements
+from rest_framework.decorators import api_view
 
 from .serializers import EventSerializer, TagSerializer, TaskSerializer, WebHookSerializer, WebHookReadSerializer
 from .permissions import IsOwner
 from base.models import *
+
+
+@api_view(http_method_names=['GET'])
+def home(request):
+    host = request.scheme + "://" + request.get_host()
+    return Response(data={
+        'event': host + "/api/event",
+        'tags': host + "/api/tags",
+        'task': host + "/api/task",
+        'webhooks': host + "/api/webhooks"
+    }, status=status.HTTP_200_OK)
 
 
 class TagBasic(ListAPIView, APIView):

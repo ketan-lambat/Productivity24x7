@@ -11,6 +11,8 @@ class IsOwner(BasePermission):
                 return True
             else:
                 return False
+        else:
+            return False
 
     def has_object_permission(self, request, view, obj):
         access_token = get_access_token_model()
