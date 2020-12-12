@@ -149,7 +149,7 @@ def profile(request):
 
 def auth_callback(request, provider):
     if provider == 'github':
-        host = request.scheme + "://" + request.get_host()
+        host = "https" + "://" + request.get_host()
         if 'github_oauth_state' in request.session and 'github_oauth_use' in request.session:
             state = request.session['github_oauth_state']
             path = host + request.get_full_path()
