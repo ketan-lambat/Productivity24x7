@@ -1,6 +1,4 @@
-from __future__ import print_function
 from django.shortcuts import render, redirect
-from pprint import pprint
 import datetime
 import pickle
 import os.path
@@ -16,25 +14,25 @@ def homepage_view(request):
 
 
 def get_calender_events_view(request):
-    SCOPES = ['https://www.googleapis.com/auth/calendar']
+    scopes = ['https://www.googleapis.com/auth/calendar']
     credentials_file = settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON
-    creds = None
+    cred = None
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
+            cred = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+    if not cred or not cred.valid:
+        if cred and cred.expired and cred.refresh_token:
+            cred.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                credentials_file, SCOPES)
-            creds = flow.run_local_server(port=0)
+                credentials_file, scopes)
+            cred = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+            pickle.dump(cred, token)
 
-    service = build('calendar', 'v3', credentials=creds)
+    service = build('calendar', 'v3', credentials=cred)
 
     now = datetime.datetime.utcnow().isoformat() + 'Z'
 
@@ -42,19 +40,16 @@ def get_calender_events_view(request):
     calendar_ids = calendar_list['items']
     req_calendar = 'Prod_events'
 
-    # pprint(calendar_ids)
-    # calendar_id = calendar_ids[i]['id']
+    calendar_id = None
     for i in range(len(calendar_ids)):
-        if (calendar_ids[i]['summary'] == req_calendar):
+        if calendar_ids[i]['summary'] == req_calendar:
             calendar_id = calendar_ids[i]['id']
-
-    # print(calendar_id)
 
     events_result = service.events().list(calendarId=calendar_id, timeMin=now).execute()
     events = events_result.get('items', [])
 
     if not events:
-        print('No upcoming events found.')
+        pass
     for event in events:
         start_time = event['start'].get('dateTime', event['start'].get('date'))
         title = event['summary']
