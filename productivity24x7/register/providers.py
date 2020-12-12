@@ -1,7 +1,7 @@
 from requests_oauthlib import OAuth2Session
 
-GITHUB_CLIENT_ID = ""
-GITHUB_CLIENT_SECRET = ""
+GITHUB_CLIENT_ID = "81454db25d7699711821"
+GITHUB_CLIENT_SECRET = "e1ab3a5e2a21a86220a1af58dcff972827e239d8"
 GITHUB_REDIRECT_URI = "http://localhost:8000/auth/oauth/github"
 GITHUB_BASE_AUTH_URL = 'https://github.com/login/oauth/authorize'
 GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'

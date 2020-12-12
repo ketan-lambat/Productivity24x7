@@ -31,7 +31,7 @@ class Task(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=True)
-    managed_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    managed_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     tags = models.ForeignKey(Tag, blank=True, null=True, on_delete=models.SET_NULL)
     duration = models.PositiveIntegerField(blank=True, validators=[MinValueValidator(1), MaxValueValidator(10000)])
     deadline = models.DateTimeField(auto_now=False, blank=True, null=True)

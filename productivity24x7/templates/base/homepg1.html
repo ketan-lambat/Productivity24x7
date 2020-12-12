@@ -53,10 +53,10 @@
             </li>
         </ul>
         {% if request.user.is_authenticated %}
-            <form class="form-inline my-2 my-lg-0">
-
-                <button class="btn btn-outline-primary my-2 my-sm-0">{{ request.user.repr }}</button>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'logout' %}">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">{{ request.user.repr }}</button>
             </form>
+
         {% else %}
             <form class="form-inline my-2 my-lg-0" action="{% url 'login' %}">
 
