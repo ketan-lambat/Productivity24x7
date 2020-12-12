@@ -107,4 +107,4 @@ class EventTags(models.Model):
 class WebHook(models.Model):
     secret = models.CharField(max_length=40, blank=False)
     url = models.URLField(max_length=150, blank=False)
-    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, editable=False)
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, editable=False, related_name="webhooks")

@@ -167,3 +167,39 @@ class EventBasic(ListAPIView, APIView):
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class EventDetails(APIView):
+    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    required_alternate_scopes = {
+        "GET": [['event.read']],
+        "DELETE": [['event.delete']],
+        "POST": [['event.edit'], ['event.add', 'event.delete']]
+    }
+
+    def get_object_or_404(self, request, idd):
+        try:
+            obj = Event.objects.get(owner=request.user, pk=idd)
+        except Task.DoesNotExist:
+            raise Http404
+        self.check_object_permissions(request, obj)
+        return obj
+
+    def get(self, request, idd):
+        obj = self.get_object_or_404(request, idd)
+        serializer = EventSerializer(obj)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request, idd):
+        obj = self.get_object_or_404(request, idd)
+        obj.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def post(self, request, idd):
+        obj = self.get_object_or_404(request, idd)
+        serializer = EventSerializer(instance=obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save(owner=request.user)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
