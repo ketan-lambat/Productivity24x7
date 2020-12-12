@@ -64,9 +64,15 @@
         <hr class="w-25 mx-auto"/>
         <h1 style="color:#f6f8f8" class="display-4">Focus on being productive instead of busy.</h1>
         <p style="color:#f6f8f8" style="font-size:25px"> Tim Ferris </p>
-        <form action="{% url 'register' %}">
-            <button type="submit" class="btn btn-outline-primary btn-lg">Sign Up</button>
-        </form>
+        {% if request.user.is_authenticated is not True %}
+            <form action="{% url 'register' %}">
+                <button type="submit" class="btn btn-outline-primary btn-lg">Sign Up</button>
+            </form>
+        {% else %}
+            <form action="{% url 'events' %}">
+                <button type="submit" class="btn btn-outline-primary btn-lg">Google Calendar</button>
+            </form>
+        {% endif %}
         <hr class="w-25 mx-auto"/>
     </div>
 
@@ -92,9 +98,6 @@
             <!--Heading Section Ending -->
             <div class="button2">
                 <hr class="w-25 mx-auto"/>
-                <form action="{% url 'events' %}">
-                    <button type="submit" class="btn btn-outline-primary btn-lg">Google Calendar</button>
-                </form>
                 <hr class="w-25 mx-auto"/>
             </div>
 
