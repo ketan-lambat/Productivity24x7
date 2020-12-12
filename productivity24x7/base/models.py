@@ -41,7 +41,6 @@ class Task(models.Model):
     deadline = models.DateTimeField(auto_now=False, null=True, default=None)
     is_completed = models.BooleanField(default=None, null=True)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, editable=False)
-    g_event_id = models.CharField(max_length=100, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.title
@@ -53,6 +52,7 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, editable=False)
+    g_event_id = models.CharField(max_length=100, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.title
