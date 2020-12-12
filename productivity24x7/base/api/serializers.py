@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from base.models import Tag, Task, Event
+from base.models import Tag, Task, Event, WebHook
 from django.core.exceptions import ValidationError as ValidError
 
 
@@ -86,3 +86,33 @@ class EventSerializer(serializers.Serializer):
         t.end = validated_data.get('end', instance.end)
         t.tags = validated_data.get('tags', instance.tags)
         return self.save_model(t)
+
+
+class WebHookSerializer(serializers.Serializer):
+    secret = serializers.CharField(max_length=40, required=True, min_length=30)
+    url = serializers.URLField(max_length=100, required=True)
+
+    def save_model(self, instance):
+        try:
+            instance.save()
+        except ValidError as v:
+            raise serializers.ValidationError(detail=v.error_dict)
+        return instance
+
+    def create(self, validated_data: dict):
+        t = WebHook(**validated_data)
+        return self.save_model(t)
+
+    def update(self, instance, validated_data):
+        return instance
+
+
+class WebHookReadSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    url = serializers.URLField(max_length=100, required=True)
+
+    def create(self, validated_data: dict):
+        return None
+
+    def update(self, instance, validated_data):
+        return None

@@ -176,7 +176,10 @@ OAUTH2_PROVIDER = {
         'task.delete': "Delete Tasks",
         'task.add': "Add New Tasks",
         'event.read': "Read Events",
-        'event.add': "Add New Event"
+        'event.add': "Add New Event",
+        'event.delete': "Delete Events",
+        'event.edit': "Edit Events",
+        'webhooks': "Add/See Webhooks"
     }
 }
 
