@@ -17,7 +17,7 @@ class TagBasic(ListAPIView, APIView):
     def get_queryset(self):
         return Tag.objects.filter(owner__pk=self.request.user.pk).all()
 
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['tags.read']],
         "POST": [['tags.add']]
@@ -33,7 +33,7 @@ class TagBasic(ListAPIView, APIView):
 
 
 class TagDetail(APIView):
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['tags.read']],
         "DELETE": [['tags.delete']],
@@ -74,7 +74,7 @@ class TaskBasic(ListAPIView, APIView):
     def get_queryset(self):
         return Task.objects.filter(owner__pk=self.request.user.pk).all()
 
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['task.read']],
         "POST": [['task.add']]
@@ -90,7 +90,7 @@ class TaskBasic(ListAPIView, APIView):
 
 
 class TaskDetails(APIView):
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['task.read']],
         "DELETE": [['task.delete']],
@@ -131,7 +131,7 @@ class WebHookBasic(ListAPIView, APIView):
     def get_queryset(self):
         return WebHook.objects.filter(owner__pk=self.request.user.pk).all()
 
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['webhooks']],
         "POST": [['event.read', 'webhooks']]
@@ -154,7 +154,7 @@ class EventBasic(ListAPIView, APIView):
     def get_queryset(self):
         return Event.objects.filter(owner__pk=self.request.user.pk).all()
 
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['event.read']],
         "POST": [['event.add']]
@@ -170,7 +170,7 @@ class EventBasic(ListAPIView, APIView):
 
 
 class EventDetails(APIView):
-    permission_classes = [IsAuthenticated, IsOwner | TokenMatchesOASRequirements]
+    permission_classes = [IsAuthenticated & (IsOwner | TokenMatchesOASRequirements)]
     required_alternate_scopes = {
         "GET": [['event.read']],
         "DELETE": [['event.delete']],
