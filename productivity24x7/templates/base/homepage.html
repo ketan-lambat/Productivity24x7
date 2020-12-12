@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)),
+            url(https://images.wallpapersden.com/image/download/windows-10-dark_a2dsaGWUmZqaraWkpJRmbmdlrWZlbWU.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .button2 {
+            margin-left: 31em;
+        }
+    </style>
+</head>
+<body>
+
+
+<!--Navbar Start-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"> Productivity 24x7 </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        {% if request.user.is_authenticated %}
+            <form class="form-inline my-2 my-lg-0" action="{% url 'logout' %}">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">{{ request.user.repr }}</button>
+            </form>
+
+        {% else %}
+            <form class="form-inline my-2 my-lg-0" action="{% url 'login' %}">
+
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button>
+            </form>
+        {% endif %}
+    </div>
+</nav>
+
+<!--Navbar End-->
+
+<!--Heading Section Start-->
+
+<section class="main-heading my-5">
+    <div class="text-center">
+        <hr class="w-25 mx-auto"/>
+        <h1 style="color:#f6f8f8" class="display-4">Focus on being productive instead of busy.</h1>
+        <p style="color:#f6f8f8" style="font-size:25px"> Tim Ferris </p>
+        <form action="{% url 'register' %}">
+            <button type="submit" class="btn btn-outline-primary btn-lg">Sign Up</button>
+        </form>
+        <hr class="w-25 mx-auto"/>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 col-xxl-6">
+                <figure>
+                    <img src="{% static 'images\base\1.jpg' %}" alt="jogging image" width="400" height="280"
+                         class="img-fluid about-img">
+                </figure>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-12 col-xxl-6">
+                <h2 style="color:#f6f8f8" class="second-heading my-5">Schedule your days and never miss any important
+                    meetings </h2>
+                <ul style="font-size: 25px">
+                    <li style="color:#f6f8f8">Webhooks</li>
+                    <li style="color:#f6f8f8">OAuth</li>
+                    <li style="color:#f6f8f8">Multiple logins</li>
+                </ul>
+            </div>
+
+            <!--Heading Section Ending -->
+            <div class="button2">
+                <hr class="w-25 mx-auto"/>
+                <form action="{% url 'events' %}">
+                    <button type="submit" class="btn btn-outline-primary btn-lg">Google Calendar</button>
+                </form>
+                <hr class="w-25 mx-auto"/>
+            </div>
+
+            <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+                    crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+

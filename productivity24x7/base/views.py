@@ -7,12 +7,14 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from django.conf import settings
 from .models import Event
+from django.contrib.auth.decorators import login_required
 
 
 def homepage_view(request):
-    return render(request, "base/homepg1.html")
+    return render(request, "base/homepage.html")
 
 
+@login_required()
 def get_calender_events_view(request):
     scopes = ['https://www.googleapis.com/auth/calendar']
     credentials_file = settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON
@@ -52,6 +54,7 @@ def get_calender_events_view(request):
         pass
     for event in events:
         start_time = event['start'].get('dateTime', event['start'].get('date'))
+        end_time = event['end'].get('dateTime', event['end'].get('date'))
         title = event['summary']
         if event['description'] is not None:
             description = event['description']
@@ -61,16 +64,19 @@ def get_calender_events_view(request):
 
         event, event_created = Event.objects.get_or_create(title=title,
                                                            description=description,
-                                                           start_time=start_time,
-                                                           g_event_id=g_event_id)
+                                                           start=start_time,
+                                                           end=end_time,
+                                                           g_event_id=g_event_id,
+                                                           owner=request.user)
         if event_created:
             event.save()
 
     return redirect('events')
 
 
+@login_required()
 def disply_calendar_events(request):
-    events = Event.objects.all()
+    events = Event.objects.all().order_by('start')
     context = {
         'events_arr': events,
     }

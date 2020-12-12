@@ -3,28 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Events</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 3em;
+            margin-left: 8em;
+
+        }
+
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 6px;
+        }
+
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)),
+            url(https://images.wallpapersden.com/image/download/windows-10-dark_a2dsaGWUmZqaraWkpJRmbmdlrWZlbWU.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-left: 8em;
+        }
+
+        .button1 {
+            background-color: rgb(3, 0, 41);
+            color: rgb(255, 254, 254);
+            border: 2px solid #008CBA;
+        }
+
+        .button1:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+    </style>
 </head>
 <body>
+
 <a href="{% url 'get_g_events' %}">
-    <button>Load Events</button>
+    <button class="button button1">Load Events</button>
 </a>
-<table>
+
+<table style="color:#f6f8f8">
     <thead>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Start Time</th>
+    <th style="color:#f6f8f8">Title</th>
+    <th style="color:#f6f8f8">Description</th>
+    <th style="color:#f6f8f8">Start Time</th>
+    <th style="color:#f6f8f8">End Time</th>
     </thead>
     <tbody>
     {% for event in events_arr %}
         <tr>
-            <td>
+            <td style="color:#f6f8f8">
                 {{ event.title }}
             </td>
-            <td>
+            <td style="color:#f6f8f8">
                 {{ event.description }}
             </td>
-            <td>
-                {{ event.start_time }}
+            <td style="color:#f6f8f8">
+                {{ event.start }}
+            </td>
+            <td style="color:#f6f8f8">
+                {{ event.end }}
             </td>
         </tr>
     {% endfor %}
